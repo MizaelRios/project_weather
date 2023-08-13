@@ -1,6 +1,6 @@
 import NavBar from '@/components/Navbar';
 import './globals.css';
-import { Inter } from 'next/font/google';
+import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Clima Hoje',
@@ -17,6 +17,7 @@ export default function RootLayout({
       <body className='relative'>
         <NavBar />
         {children}
+        <Footer/>
       </body>
     </html>
   );

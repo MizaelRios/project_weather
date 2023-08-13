@@ -13,7 +13,7 @@ const NavBar = () => (
           height={50}
           className='object-contain'
         />
-        <span className='text-[20px] leading-[17px] font-semibold'>Clima Hoje</span>
+        <span className='text-2xl font-extrabold'>Clima Hoje</span>
       </Link>
 
       <CustomButton
