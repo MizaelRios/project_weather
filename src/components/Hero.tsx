@@ -16,11 +16,11 @@ const Hero = () => {
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
         <h1 className="hero__title">
-          Consulte, busque, veja como está o clima hoje na sua cidade!
+          Qual o clima hoje na sua cidade?
         </h1>
 
         <p className="hero__subtitle">
-          De forma simples e fácil veja se vai chover ou fazer sol hoje na sua cidade.
+          De forma simples e fácil veja a previsão do tempo.
         </p>
 
         <CustomButton
