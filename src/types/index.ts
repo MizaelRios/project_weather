@@ -33,6 +33,7 @@ export interface WeatherProps {
   current: Current
   forecast: Forecast
   alerts: Alerts
+  error: Error
 }
 
 export interface Location {
@@ -174,4 +175,14 @@ export interface Condition3 {
 
 export interface Alerts {
   alert: any[]
+}
+
+export interface Error {
+  code: number
+  message: string
+}
+
+export interface Coords {
+  latitude: number
+  longitude: number
 }

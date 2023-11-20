@@ -1,10 +1,7 @@
 import Hero from '@/components/Hero';
-import WeatherCard from '@/components/WeatherCard';
-import { Forecastday, HomeProps } from '@/types';
-import { fetchWeather, formatDateAndGetDayOfTheWeek } from '@/utils';
+import WeatherHome from '@/components/WeatherHome';
 
-export default async function Home() {
-  const weather = await fetchWeather({latLong: undefined});
+export default function Home() {
 
   return (
     <main className='overflow-hidden'>
@@ -20,21 +17,7 @@ export default async function Home() {
           <div> Search</div>
         </div>
 
-        {weather ? (
-          <section>
-            <div className='home__weathers-wrapper'>
-              {weather?.forecast?.forecastday?.map((forecastday: Forecastday) => (
-                <WeatherCard weatherCurrent={weather?.current} weatherForecastDay={forecastday} />
-              ))}
-            </div>
-          </section>
-        ) : (
-          <div className='home__error-container'>
-            <h2 className='text-black text-xl font-bold'>Oops, no results</h2>
-            <p>{weather?.Alerts?.alert}</p>
-          </div>
-        )}
-
+        <WeatherHome />
       </div>
     </main>
   );

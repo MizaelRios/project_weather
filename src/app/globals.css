@@ -88,15 +88,31 @@
 
 /* START: weather- Card styles */
 .weather-card {
-  @apply flex flex-col p-6 justify-center items-start text-black-100 bg-sky-200 hover:bg-white hover:shadow-md rounded-3xl;
+  @apply flex flex-col p-6 justify-center items-start text-black-100 bg-blue-50 hover:bg-white hover:shadow-md rounded-3xl;
 }
 
 .weather-card__content {
-  @apply w-full flex justify-between items-start gap-2;
+  @apply w-full flex justify-center items-start gap-2;
+}
+
+.weather-card__content-temp {
+  @apply w-full flex justify-center items-start gap-2 my-7;
 }
 
 .weather-card__content-title {
   @apply text-[22px] leading-[26px] font-bold capitalize;
+}
+
+.weather-card__content-title-day {
+  @apply text-[22px] leading-[26px] font-bold capitalize;
+}
+
+.weather-card__content-title-temp {
+  @apply text-[50px] leading-[26px] font-bold capitalize;
+}
+
+.weather-card__content-title-condition {
+  @apply text-[15px] leading-[26px] font-bold capitalize;
 }
 
 .weather-card__price {
