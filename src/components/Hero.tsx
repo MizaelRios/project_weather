@@ -1,6 +1,6 @@
 "use client";
 
-import CustomButton from "./CustomButton";
+import CustomButton from "./ui/CustomButton";
 import Image from "next/image";
 
 const Hero = () => {
@@ -24,7 +24,7 @@ const Hero = () => {
         </p>
 
         <CustomButton
-          title="Consultar sua cidade"
+          title="Consultar cidade"
           containerStyles="bg-primary-blue text-white rounded-full mt-10"
           handleClick={handleScroll}
         />

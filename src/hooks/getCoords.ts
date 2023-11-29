@@ -4,7 +4,8 @@ import { Coords } from "@/types";
 import { useEffect, useState } from "react";
 
 export const useCoords = () => {
-    const [coords, setCoords] = useState<Coords | null>(null);
+    const coordsInitial: Coords = {latitude: -23.556504852210065, longitude: -46.6409825905939};
+    const [coords, setCoords] = useState<Coords | null>(coordsInitial);
 
     useEffect(() => {
 

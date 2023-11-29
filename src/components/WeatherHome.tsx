@@ -2,16 +2,18 @@
 
 import WeatherCard from "./WeatherCard";
 import { useEffect, useState } from "react";
-import { fetchWeather } from "@/lib";
+import { fetchWeather } from "@/lib/fetchWeather";
 import { Forecastday, WeatherProps } from "@/types";
+import { useCoords } from "@/hooks/getCoords";
 
 const WeatherHome = () => {
+    const coords = useCoords();
     const [weather, setWeather] = useState<WeatherProps | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const weatherResp = await fetchWeather({ latLong: undefined });
+                const weatherResp = await fetchWeather({ latitude: coords?.latitude, longitude: coords?.longitude });
                 setWeather(weatherResp);
             } catch (err) {
                 console.log('Error occurred when fetching weather');
@@ -19,11 +21,11 @@ const WeatherHome = () => {
         };
 
         fetchData();
-    }, []);
+    }, [coords]);
 
     return (
         <>
-            {weather ? (
+            {weather && weather?.error === undefined ? (
                 <section>
                     <div className='home__weathers-wrapper'>
                         {weather?.forecast?.forecastday?.map((forecastday: Forecastday, index) => (

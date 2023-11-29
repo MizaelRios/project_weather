@@ -25,7 +25,8 @@ export interface HomeProps {
 }
 
 export interface FilterProps {
-  latLong?: string;
+  latitude?: number
+  longitude?: number
 }
 
 export interface WeatherProps {
@@ -185,4 +186,24 @@ export interface Error {
 export interface Coords {
   latitude: number
   longitude: number
+}
+
+export interface SearchStatesProps {
+  state: string;
+  setState: (state: string) => void;
+}
+
+export type States = State[]
+
+export interface State {
+  id: number
+  sigla: string
+  nome: string
+  regiao: Regiao
+}
+
+export interface Regiao {
+  id: number
+  sigla: string
+  nome: string
 }

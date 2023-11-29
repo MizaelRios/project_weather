@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import SearchBar from '@/components/Searchbar';
 import WeatherHome from '@/components/WeatherHome';
 
 export default function Home() {
@@ -14,7 +15,10 @@ export default function Home() {
         </div>
 
         <div className='home__filters'>
-          <div> Search</div>
+          <SearchBar />
+
+          <div className='home__filter-container'>
+          </div>
         </div>
 
         <WeatherHome />
