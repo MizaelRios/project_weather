@@ -6,14 +6,19 @@ import { fetchWeather } from "@/lib/fetchWeather";
 import { Forecastday, WeatherProps } from "@/types";
 import { useCoords } from "@/hooks/getCoords";
 
-const WeatherHome = () => {
+interface WeatherHomeProps {
+    city: string;
+}
+
+const WeatherHome = ({ city }: WeatherHomeProps) => {
     const coords = useCoords();
     const [weather, setWeather] = useState<WeatherProps | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const weatherResp = await fetchWeather({ latitude: coords?.latitude, longitude: coords?.longitude });
+                const param = `${coords?.latitude}, ${coords?.longitude}`;
+                const weatherResp = await fetchWeather(param);
                 setWeather(weatherResp);
             } catch (err) {
                 console.log('Error occurred when fetching weather');
@@ -35,8 +40,8 @@ const WeatherHome = () => {
                 </section>
             ) : (
                 <div className='home__error-container'>
-                    <h2 className='text-black text-xl font-bold'>Oops, no results</h2>
-                    <p>{weather?.error?.message}</p>
+                    <h2 className='text-black text-xl font-bold'>Oops, não foi possível consultar as informações sobre o tempo.</h2>
+                    <p>Erro: {weather?.error?.message}</p>
                 </div>
             )}
         </>

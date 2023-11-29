@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { SearchStatesProps, States } from "@/types";
+import { SearchStatesProps, State, States } from "@/types";
 import { fetchStates } from "@/lib/fetchIbge";
 
-const SearchStates = ({ state, setState }: SearchStatesProps) => {
+const SearchStates = ({ stateSelected, setState }: SearchStatesProps) => {
   const [query, setQuery] = useState("");
   const [states, setStates] = useState<States>([]);
 
@@ -31,12 +31,12 @@ const SearchStates = ({ state, setState }: SearchStatesProps) => {
       );
 
   return (
-    <div className='search-city'>
-      <Combobox value={state} onChange={setState} >
+    <div className='search-state'>
+      <Combobox value={stateSelected} onChange={setState} >
         <div className='relative w-full'>
           <Combobox.Input
-            className='search-city__input'
-            displayValue={(item: string) => item}
+            className='search-state__input'
+            displayValue={(state: State) => state.nome}
             onChange={(event) => setQuery(event.target.value)}
             placeholder='Estado...'
           />
@@ -54,24 +54,24 @@ const SearchStates = ({ state, setState }: SearchStatesProps) => {
               {filteredStates?.length === 0 && query !== "" ? (
                 <Combobox.Option
                   value={query}
-                  className='search-city__option'
+                  className='search-state__option'
                 >
                   Create "{query}"
                 </Combobox.Option>
               ) : (
-                filteredStates?.map((item) => (
+                filteredStates?.map((state) => (
                   <Combobox.Option
-                    key={item.id}
+                    key={state.id}
                     className={({ active }) =>
-                      `relative search-city__option ${active ? "bg-primary-blue text-white" : "text-gray-900"
+                      `relative search-state__option ${active ? "bg-primary-blue text-white" : "text-gray-900"
                       }`
                     }
-                    value={item.nome}
+                    value={state}
                   >
                     {({ selected, active }) => (
                       <>
                         <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {item.nome}
+                          {state.nome}
                         </span>
                         {selected ? (
                           <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? "text-white" : "text-pribg-primary-purple"}`}

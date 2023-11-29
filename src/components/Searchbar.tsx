@@ -4,6 +4,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import SearchStates from "./SearchState";
+import { SearchBarProps, State } from "@/types";
+import SearchCity from "./SearchCity";
 
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type='submit' className={`z-10 ${otherClasses}`}>
@@ -17,35 +19,34 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   </button>
 );
 
-const SearchBar = () => {
-  const [state, setState] = useState("");
-  const [model, setModel] = useState("");
+const SearchBar = ({ city, setCity }: SearchBarProps) => {
+  const [state, setState] = useState<State>();
 
   const router = useRouter();
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (state.trim() === "" && model.trim() === "") {
+    if (state?.nome.trim() === "" && city?.nome.trim() === "") {
       return alert("Por favor inserir informações necessárias para a consulta!");
     }
 
-    updateSearchParams(model.toLowerCase(), state.toLowerCase());
+    updateSearchParams(city?.nome.toLowerCase() ?? "", state?.nome.toLowerCase() ?? "");
   };
 
-  const updateSearchParams = (model: string, city: string) => {
+  const updateSearchParams = (state: string, city: string) => {
     const searchParams = new URLSearchParams(window.location.search);
 
-    if (model) {
-      searchParams.set("model", model);
+    if (state) {
+      searchParams.set("state", state);
     } else {
-      searchParams.delete("model");
+      searchParams.delete("state");
     }
 
     if (city) {
       searchParams.set("city", city);
     } else {
-       searchParams.delete("city");
+      searchParams.delete("city");
     }
 
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
@@ -57,20 +58,17 @@ const SearchBar = () => {
     <form className='searchbar' onSubmit={handleSearch}>
       <div className='searchbar__item'>
         {<SearchStates
-          state={state}
+          stateSelected={state}
           setState={setState}
         />}
         <SearchButton otherClasses='sm:hidden' />
       </div>
       <div className='searchbar__item'>
-        <input
-          type='text'
-          name='model'
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-          placeholder='Cidade...'
-          className='searchbar__input'
-        />
+        {<SearchCity
+          uf={state?.sigla.trim() ?? ""}
+          citySelected={city}
+          setCity={setCity}
+        />}
         <SearchButton otherClasses='sm:hidden' />
       </div>
       <SearchButton otherClasses='max-sm:hidden' />
