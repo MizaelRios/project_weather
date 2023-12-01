@@ -1,4 +1,7 @@
 {
+    "eslint.workingDirectories": [
+        "./{PATH_TO_CLIENT}"
+    ],
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
