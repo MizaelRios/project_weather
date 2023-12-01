@@ -2,8 +2,15 @@
 
 import CustomButton from "./ui/CustomButton";
 import Image from "next/image";
+import WeatherCardSimplified from "./WeatherCardSimplified";
+import { WeathersContext } from "@/context/weathersContext";
+import { useContext } from "react";
+import { returnImageHero } from "@/utils/returnImageHero";
 
 const Hero = () => {
+  const weathersContext = useContext(WeathersContext);
+  const weathers = weathersContext.weathers;
+
   const handleScroll = () => {
     const nextSection = document.getElementById("discover");
 
@@ -30,8 +37,11 @@ const Hero = () => {
         />
       </div>
       <div className="hero__image-container">
+        <div className="hero__image-card">
+          {weathers && <WeatherCardSimplified {...weathers} />}
+        </div>
         <div className="hero__image">
-          <Image src="/hero_sun_lightning_rain.png" fill alt="hero" className="object-contain" />
+          <Image src={returnImageHero(weathers?.current?.condition?.text ?? "", weathers?.current?.condition?.icon ?? "")} fill alt="hero" className="object-contain" />
         </div>
         <div className="hero__image-overlay" />
       </div>

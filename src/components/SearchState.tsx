@@ -20,7 +20,6 @@ const SearchStates = ({ stateSelected, setState }: SearchStatesProps) => {
     fetchData();
   }, []);
 
-
   const filteredStates =
     query === ""
       ? states

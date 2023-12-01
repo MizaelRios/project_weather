@@ -1,25 +1,30 @@
 "use client";
 
 import WeatherCard from "./WeatherCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchWeather } from "@/lib/fetchWeather";
 import { Forecastday, WeatherProps } from "@/types";
-import { useCoords } from "@/hooks/getCoords";
+import { CoordsContext } from "@/context/coordsContext";
+
 
 interface WeatherHomeProps {
     city: string;
 }
 
 const WeatherHome = ({ city }: WeatherHomeProps) => {
-    const coords = useCoords();
+    const coordsContext = useContext(CoordsContext);
+    const coords = coordsContext.coords;
+
     const [weather, setWeather] = useState<WeatherProps | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const param = `${coords?.latitude}, ${coords?.longitude}`;
-                const weatherResp = await fetchWeather(param);
-                setWeather(weatherResp);
+                if (coords) {
+                    const param = `${coords?.latitude}, ${coords?.longitude}`;
+                    const weatherResp = await fetchWeather(param);
+                    setWeather(weatherResp);
+                }
             } catch (err) {
                 console.log('Error occurred when fetching weather');
             }

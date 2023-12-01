@@ -1,4 +1,11 @@
 import { MouseEventHandler } from "react";
+import { User } from "next-auth";
+
+export type UserSession =
+  | (User & {
+    id: string;
+  })
+  | undefined;
 
 export interface CustomButtonProps {
   isDisabled?: boolean;

@@ -1,6 +1,7 @@
-import NavBar from '@/components/Navbar';
 import '../styles/globals.css';
+import NavBar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Providers } from '@/provider';
 
 export const metadata = {
   title: 'Como Vai o Clima hoje? Previsão do tempo',
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang='pt-BR'>
       <body className='relative'>
-        <NavBar />
-        {children}
-        <Footer/>
+        <Providers>
+          <NavBar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

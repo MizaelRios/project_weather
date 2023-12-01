@@ -47,8 +47,8 @@ const WeatherCard = ({ weatherCurrent, weatherForecastDay }: WeatherCardProps) =
               <span>° máx</span>
             </p>
           </div>
-          <div className="car-card__icon">
-            <p className="car-card__icon-text">{weatherForecastDay.day.mintemp_c}
+          <div className='flex flex-col justify-center items-center gap-2'>
+            <p className='text-[14px] leading-[17px]'>{weatherForecastDay.day.mintemp_c}
               <span>° min</span>
             </p>
           </div>
