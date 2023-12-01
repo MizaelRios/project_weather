@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { formatDate, formatDateAndGetDayOfTheWeek } from "@/utils/formatDate";
+import { compareDateWithCurrent, formatDateAndGetDayOfTheWeek, formatDateForCard } from "@/utils/date";
 import { generateImageUrl } from "@/utils/generateUrlImage";
 import { Current, Forecastday } from "@/types";
+import { useState } from "react";
+import CustomButton from "./ui/CustomButton";
+import WeatherCardDetails from "./WeatherCardDetails";
 
 interface WeatherCardProps {
   weatherCurrent: Current;
@@ -11,32 +14,34 @@ interface WeatherCardProps {
 }
 
 const WeatherCard = ({ weatherCurrent, weatherForecastDay }: WeatherCardProps) => {
-
+  const weatherForecastDayFilter = weatherForecastDay?.hour?.find(item => compareDateWithCurrent(item.time));
+  const [isOpen, setIsOpen] = useState(false);
+  
   return (
     <div className="weather-card group">
       <div className="weather-card__content">
         <h2 className="weather-card__content-title-day">
-          {formatDateAndGetDayOfTheWeek(weatherForecastDay.date)}
+          {formatDateAndGetDayOfTheWeek(weatherForecastDayFilter?.time ?? "")}
         </h2>
       </div>
 
       <div className="weather-card__content">
         <span className='font-medium'>
-          {formatDate(weatherForecastDay.date)}
+          {formatDateForCard(weatherForecastDayFilter?.time ?? "")}
         </span>
       </div>
 
       <div className="weather-card__content-temp">
-        <h1 className="weather-card__content-title-temp" >{weatherCurrent.temp_c} <span>°</span></h1>
+        <h1 className="weather-card__content-title-temp" >{weatherForecastDayFilter?.temp_c ?? 0} <span>°</span></h1>
       </div>
 
       <div className='relative w-full h-20 my-2 object-contain flex items-center justify-center'>
-        <Image src={generateImageUrl(weatherCurrent.condition.icon)}
+        <Image src={generateImageUrl(weatherForecastDayFilter?.condition.icon ?? "")}
           alt='Ícone Clima'
           priority
           className='object-contain'
           width={50} height={50} />
-        <span className="weather-card__content-title-condition">{weatherCurrent.condition.text}</span>
+        <span className="weather-card__content-title-condition">{weatherForecastDayFilter?.condition.text ?? ""}</span>
       </div>
 
       <div className='relative flex w-full mt-2'>
@@ -53,7 +58,17 @@ const WeatherCard = ({ weatherCurrent, weatherForecastDay }: WeatherCardProps) =
             </p>
           </div>
         </div>
+        <div className="weather-card__btn-container">
+          <CustomButton
+            title='Mais detalhes'
+            containerStyles='w-full py-[16px] rounded-full bg-primary-blue'
+            textStyles='text-white text-[14px] leading-[17px] font-bold'
+            rightIcon='/right-arrow.svg'
+            handleClick={() => setIsOpen(true)}
+          />
+        </div>
       </div>
+      <WeatherCardDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} weatherForecastDay={weatherForecastDayFilter} />
     </div>
   );
 };

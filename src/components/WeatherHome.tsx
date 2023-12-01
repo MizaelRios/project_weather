@@ -14,14 +14,13 @@ interface WeatherHomeProps {
 const WeatherHome = ({ city }: WeatherHomeProps) => {
     const coordsContext = useContext(CoordsContext);
     const coords = coordsContext.coords;
-
     const [weather, setWeather] = useState<WeatherProps | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (coords) {
-                    const param = `${coords?.latitude}, ${coords?.longitude}`;
+                if (city || coords) {
+                    const param = city ? city : `${coords?.latitude}, ${coords?.longitude}`;
                     const weatherResp = await fetchWeather(param);
                     setWeather(weatherResp);
                 }
@@ -31,7 +30,7 @@ const WeatherHome = ({ city }: WeatherHomeProps) => {
         };
 
         fetchData();
-    }, [coords]);
+    }, [city, coords]);
 
     return (
         <>

@@ -5,7 +5,6 @@ import { images } from "@/constants";
 import { WeatherProps } from "@/types";
 
 const WeatherCardSimplified = ({ ...weather }: WeatherProps) => {
-console.log(weather);
   return (
     <div className="weather-card-simplified group">
       <div className='relative w-full h-12 object-contain flex items-center justify-center gap-2'>
