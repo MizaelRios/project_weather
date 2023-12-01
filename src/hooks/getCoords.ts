@@ -16,9 +16,6 @@ export const useCoords = () => {
                 };
 
                 navigator.geolocation.getCurrentPosition(successCallback);
-                return () => {
-                    navigator.geolocation.clearWatch(successCallback);
-                };
             } catch (err) {
                 console.log('Error occurred when getCoords');
             }
