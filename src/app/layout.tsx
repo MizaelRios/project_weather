@@ -7,11 +7,11 @@ export const metadata = {
   title: 'Como Vai o Clima hoje? Previsão do tempo',
   description: 'Confira como vai ser o clima hoje',
   icons: {
-    icon: ['/public/favicon.ico?v=4'],
-    apple: ['/public/apple-touch-icon.png?v=4'],
-    shortcut: ['/public/apple-touch-icon.png'],
+    icon: ['/favicon.ico?v=4'],
+    apple: ['/apple-touch-icon.png?v=4'],
+    shortcut: ['/apple-touch-icon.png'],
   },
-  manifest: '/public/site.webmanifest'
+  manifest: '/site.webmanifest'
 };
 
 export default function RootLayout({
