@@ -7,17 +7,17 @@ import SearchStates from "./SearchState";
 import { SearchBarProps, State } from "@/types";
 import SearchCity from "./SearchCity";
 
-const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
-  <button type='submit' className={`z-10 ${otherClasses}`}>
-    <Image
-      src={"/magnifying-glass.svg"}
-      alt={"magnifying glass"}
-      width={30}
-      height={30}
-      className='object-contain'
-    />
-  </button>
-);
+// const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
+//   <button type='submit' className={`z-10 ${otherClasses}`}>
+//     <Image
+//       src={"/magnifying-glass.svg"}
+//       alt={"magnifying glass"}
+//       width={30}
+//       height={30}
+//       className='object-contain'
+//     />
+//   </button>
+// );
 
 const SearchBar = ({ city, setCity }: SearchBarProps) => {
   const [state, setState] = useState<State>();
@@ -61,7 +61,7 @@ const SearchBar = ({ city, setCity }: SearchBarProps) => {
           stateSelected={state}
           setState={setState}
         />}
-        <SearchButton otherClasses='sm:hidden' />
+        {/* <SearchButton otherClasses='sm:hidden' /> */}
       </div>
       <div className='searchbar__item'>
         {<SearchCity
@@ -69,9 +69,9 @@ const SearchBar = ({ city, setCity }: SearchBarProps) => {
           citySelected={city}
           setCity={setCity}
         />}
-        <SearchButton otherClasses='sm:hidden' />
+        {/* <SearchButton otherClasses='sm:hidden' /> */}
       </div>
-      <SearchButton otherClasses='max-sm:hidden' />
+      {/* <SearchButton otherClasses='max-sm:hidden' /> */}
     </form>
   );
 };
