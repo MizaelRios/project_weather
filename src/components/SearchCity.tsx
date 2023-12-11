@@ -32,11 +32,11 @@ const SearchCity = ({uf, citySelected, setCity }: SearchCityProps) => {
 
   return (
     <div className='search-city'>
-      <Combobox value={citySelected} onChange={setCity} >
+      <Combobox value={citySelected || null} onChange={setCity} >
         <div className='relative w-full'>
           <Combobox.Input
             className='search-city__input'
-            displayValue={(city: City) => city.nome}
+            displayValue={(city: City) => city?.nome}
             onChange={(event) => setQuery(event.target.value)}
             placeholder='Cidade...'
           />
@@ -61,7 +61,7 @@ const SearchCity = ({uf, citySelected, setCity }: SearchCityProps) => {
               ) : (
                 filteredCitys?.map((city) => (
                   <Combobox.Option
-                    key={city.id}
+                    key={city?.id}
                     className={({ active }) =>
                       `relative search-city__option ${active ? "bg-primary-blue text-white" : "text-gray-900"
                       }`
@@ -71,7 +71,7 @@ const SearchCity = ({uf, citySelected, setCity }: SearchCityProps) => {
                     {({ selected, active }) => (
                       <>
                         <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {city.nome}
+                          {city?.nome}
                         </span>
                         {selected ? (
                           <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? "text-white" : "text-pribg-primary-purple"}`}

@@ -31,11 +31,11 @@ const SearchStates = ({ stateSelected, setState }: SearchStatesProps) => {
 
   return (
     <div className='search-state'>
-      <Combobox value={stateSelected} onChange={setState} >
+      <Combobox value={stateSelected || null} onChange={setState} >
         <div className='relative w-full'>
           <Combobox.Input
             className='search-state__input'
-            displayValue={(state: State) => state.nome}
+            displayValue={(state: State) => state?.nome}
             onChange={(event) => setQuery(event.target.value)}
             placeholder='Estado...'
           />
@@ -60,7 +60,7 @@ const SearchStates = ({ stateSelected, setState }: SearchStatesProps) => {
               ) : (
                 filteredStates?.map((state) => (
                   <Combobox.Option
-                    key={state.id}
+                    key={state?.id}
                     className={({ active }) =>
                       `relative search-state__option ${active ? "bg-primary-blue text-white" : "text-gray-900"
                       }`
@@ -70,7 +70,7 @@ const SearchStates = ({ stateSelected, setState }: SearchStatesProps) => {
                     {({ selected, active }) => (
                       <>
                         <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {state.nome}
+                          {state?.nome}
                         </span>
                         {selected ? (
                           <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? "text-white" : "text-pribg-primary-purple"}`}
